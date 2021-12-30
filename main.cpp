@@ -7,8 +7,31 @@ using namespace std;
 class Solution {
  public:
   int minDepth(TreeNode* root) {
-    // FIXME
-    return 0;
+    int min_depth = 0;
+    if (root) {
+      queue<TreeNode*> q;
+      q.push(root);
+      while(not q.empty()) {
+        ++min_depth;
+        size_t count = q.size();
+        for (size_t i = 0; i < count; ++i) {
+          TreeNode* node = q.front();
+          q.pop();
+          if (not node->left and not node->right) {
+            return min_depth;
+          } else {
+            if (node->left) {
+              q.push(node->left);
+            }
+            if (node->right) {
+              q.push(node->right);
+            }
+          }
+        }
+      }
+    }
+
+    return min_depth;
   }
 };
 
